@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #03274a;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            width: 80px;
+            background: #7163ff;
+            color: #fff;
+            height: 100vh;
+            padding: 1rem 0;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar:hover {
+            width: 250px;
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        .sidebar .circle-logo span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #ffcc00;
+            border-radius: 60%;
+            height: 60px;
+            width: 60px;
+            margin: 0 auto 1rem;
+            background:linear-gradient(to right,#1500ff,#ff0000);
+             
+            
+        }
+
+          
+        .sidebar .menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar .menu li {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar .menu li:hover, .menu .active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar .menu a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+
+        .sidebar .menu a i {
+            font-size: 1.5rem;
+        }
+
+        .sidebar .menu a span {
+            font-size: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .sidebar:hover .menu a span {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .main {
+            flex-grow: 1;
+            padding: 2rem;
+             background:linear-gradient(to right,#1500ff,#ff0000);
+            border-radius: 10px;
+            margin: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .main .header .header-title h2 {
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .main .header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .main .header .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .main .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .main .card {
+            background: #7163ff;
+            color: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .main .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .main .card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .main .card h3 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .main .card p {
+            font-size: 1rem;
+            margin: 0.5rem 0 0;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+        strong{
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.5.rem;
+            color: #ffcc00;
+            border-radius: 65%;
+            background:linear-gradient(to right,#1500ff,#ff0000);
+             
+            
+
+        }
+        @media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+    .sidebar:hover {
+        width: 200px;
+    }
+    .main {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="circle-logo">
+            <span>Vearn</span>
+        </div>
+        <ul class="menu">
+            <li class="active" data-section="home">
+                <a href="#">
+                    <i class="fas fa-house"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li data-section="profile">
+                <a href="#">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li data-section="dashboard">
+                <a href="#">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li data-section="videos">
+                <a href="#">
+                    <i class="fas fa-coins"></i>
+                    <span>Videos</span>
+                </a>
+            </li>
+            <li data-section="withdraw">
+                <a href="#">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Withdraw</span>
+                </a>
+            </li>
+            <li data-section="support">
+                <a href="#">
+                    <i class="fas fa-envelope"></i>
+                    <span>Support</span>
+                </a>
+            </li>
+            <li data-section="settings">
+                <a href="#">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="logout">
+                <a href="#">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <!-- Home Section -->
+        <div id="home" class="section active">
+            <h2>Home</h2>
+            <p>Welcome to <strong>Vearn</strong> your platform for earning money by simply watching videos. Start earning today by watching engaging videos, The more you watch, the more you earn.</p>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="section">
+            <h2>Profile</h2>
+            <p>Here is your profile details.</p>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section">
+            <div class="header">
+                <div class="header-title">
+                    <h2>Dashboard</h2>
+                </div>
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="User">
+                    <span>Welcome, User!</span>
+                </div>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Earnings</h3>
+                    <p>$1200</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-play"></i>
+                    <h3>Videos Watched</h3>
+                    <p>150</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-coins"></i>
+                    <h3>Available Balance</h3>
+                    <p>$400</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Videos Section -->
+        <div id="videos" class="section">
+            <h2>Videos</h2>
+            <p>Video-related content goes here.</p>
+        </div>
+
+        <!-- Withdraw Section -->
+        <div id="withdraw" class="section">
+            <h2>Withdraw</h2>
+            <p>Withdraw-related content goes here.</p>
+        </div>
+
+        <!-- Support Section -->
+        <div id="support" class="section">
+            <h2>Support</h2>
+            <p>Support-related content goes here.</p>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="section">
+            <h2>Settings</h2>
+            <p>Settings-related content goes here.</p>
+        </div>
+    </div>
+
+    <script>
+        // Add event listeners for sidebar links
+        const menuItems = document.querySelectorAll('.sidebar .menu li');
+        const sections = document.querySelectorAll('.main .section');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all menu items and sections
+                menuItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => section.classList.remove('active'));
+
+                // Add active class to the clicked menu item and corresponding section
+                item.classList.add('active');
+                const sectionId = item.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
