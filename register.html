@@ -165,7 +165,28 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }@media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                max-width: 320px;
         }
+            .form-tittle {
+                font-size: 1.4rem;
+            }
+            input {
+                font-size: 0.rem;
+            }
+            .btn {
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .form-title {
+                font-size: 1.2rem;
+            }
+         .btn {
+             font-size: 0.85rem;
+         }
     </style>
 </head>
 <body>
